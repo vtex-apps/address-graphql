@@ -1,0 +1,8 @@
+{
+  "testes": {
+    "component": "*"
+  },
+  "testes.hello-world": {
+    "component": "index"
+  }
+}
