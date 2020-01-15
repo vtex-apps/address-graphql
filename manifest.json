@@ -1,15 +1,10 @@
 {
-  "name": "teste-pedro",
+  "name": "teste-graphql",
   "vendor": "vtex",
   "version": "0.0.1",
-  "title": "Teste do Pedro",
-  "description": "App de fazer testes",
   "builders": {
-    "react": "3.x",
-    "pages": "1.x"
-  },
-  "dependencies": {
-    "vtex.styleguide": "9.x"
+    "graphql": "1.x",
+    "node": "4.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "module": "esnext",
-    "moduleResolution": "node",
-    "target": "es2017",
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react"
-  }
-}
