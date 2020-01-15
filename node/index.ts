@@ -1,40 +1,46 @@
-import { Service } from "@vtex/api";
+import {
+  Service,
+  IOClients,
+  JanusClient,
+  IOContext,
+  InstanceOptions
+} from "@vtex/api";
 
-interface Person {
-  id: string;
-  name: string;
-  friends: string[];
+const DEFAULT_TIMEOUT_MS = 10 * 1000;
+class SellerClient extends JanusClient {
+  constructor(ctx: IOContext, opts?: InstanceOptions) {
+    super(ctx, {
+      ...opts,
+      headers: {
+        VtexIdclientAutCookie: ctx.adminUserAuthToken || ctx.authToken
+      }
+    });
+  }
+
+  public getSeller = (id: string) =>
+    this.http.get(`/api/seller-register/pvt/seller/${id}`);
 }
 
-const people: Person[] = [
-  {
-    id: "1",
-    name: "Pedro",
-    friends: ["2", "3"]
-  },
-  {
-    id: "2",
-    name: "Max",
-    friends: ["1"]
-  },
-  {
-    id: "3",
-    name: "Artur",
-    friends: []
+export class Clients extends IOClients {
+  get seller() {
+    return this.getOrSet("seller", SellerClient);
   }
-];
+}
 
 export default new Service({
+  clients: {
+    implementation: Clients,
+    options: {
+      default: {
+        timeout: DEFAULT_TIMEOUT_MS
+      }
+    }
+  },
   graphql: {
     resolvers: {
       Query: {
-        user: (_, { id }: { id: string }) =>
-          people.find(({ id: userId }) => userId === id),
-        users: () => people
-      },
-      Person: {
-        friends: ({ friends }: Person) =>
-          friends.map(id => people.find(({ id: friendId }) => friendId === id))
+        seller: (_, { id }: { id: string }, ctx) =>
+          ctx.clients.seller.getSeller(id)
       }
     }
   }

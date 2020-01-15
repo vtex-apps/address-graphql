@@ -1,25 +1,28 @@
 type Query {
-  """
-  Recupera um amigo dado um idenficador
-  """
-  user(id: ID!): Person
-  """
-  Mostra a lista completa de amigos
-  """
-  users: [Person!]
+  seller(id: ID!): Seller @cacheControl(scope: PRIVATE)
 }
 
-type Person {
-  """
-  Identificador único do amigo
-  """
+type Seller {
   id: ID!
-  """
-  Nome do amigo
-  """
+  cacheId: ID!
   name: String!
-  """
-  Amigos do amigo
-  """
-  friends: [Person!]
+  logo: String
+  isActive: Boolean!
+  fulfillmentEndpoint: String!
+  allowHybridPayments: Boolean!
+  cnpj: String
+  email: String
+  description: String
+  catalogSystemEndpoint: String
+  productCommissionPercentage: Float
+  freightCommissionPercentage: Float
+  isBetterScope: Boolean!
+  sellerType: Int!
+  productFeedId: String
+  CSCIdentification: String
+  account: String
+  channel: String
+  salesChannel: String
+  isVtex: Boolean
+  score: Float
 }
