@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@vtex/api": "^6.5.0"
+    "@vtex/api": "6.13.1"
   }
 }

@@ -1,10 +1,10 @@
 {
-  "name": "teste-graphql",
+  "name": "address-graphql",
   "vendor": "vtex",
   "version": "0.0.1",
   "builders": {
     "graphql": "1.x",
-    "node": "4.x"
+    "node": "6.x"
   },
   "policies": [
     {

@@ -1,33 +1,11 @@
-import {
-  Service,
-  IOClients,
-  JanusClient,
-  IOContext,
-  InstanceOptions
-} from "@vtex/api";
+import { Service, RecorderState, ParamsContext } from "@vtex/api";
 
 const DEFAULT_TIMEOUT_MS = 10 * 1000;
-class SellerClient extends JanusClient {
-  constructor(ctx: IOContext, opts?: InstanceOptions) {
-    super(ctx, {
-      ...opts,
-      headers: {
-        VtexIdclientAutCookie: ctx.adminUserAuthToken || ctx.authToken
-      }
-    });
-  }
 
-  public getSeller = (id: string) =>
-    this.http.get(`/api/seller-register/pvt/seller/${id}`);
-}
+import { Clients } from "./clients";
+import { resolvers } from "./resolvers";
 
-export class Clients extends IOClients {
-  get seller() {
-    return this.getOrSet("seller", SellerClient);
-  }
-}
-
-export default new Service({
+export default new Service<Clients, RecorderState, ParamsContext>({
   clients: {
     implementation: Clients,
     options: {
@@ -37,11 +15,6 @@ export default new Service({
     }
   },
   graphql: {
-    resolvers: {
-      Query: {
-        seller: (_, { id }: { id: string }, ctx) =>
-          ctx.clients.seller.getSeller(id)
-      }
-    }
+    resolvers
   }
 });

@@ -1,0 +1,5 @@
+scalar IP
+
+type LocationData {
+  ip: String
+}

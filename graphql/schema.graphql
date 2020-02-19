@@ -1,28 +1,3 @@
 type Query {
-  seller(id: ID!): Seller @cacheControl(scope: PRIVATE)
-}
-
-type Seller {
-  id: ID!
-  cacheId: ID!
-  name: String!
-  logo: String
-  isActive: Boolean!
-  fulfillmentEndpoint: String!
-  allowHybridPayments: Boolean!
-  cnpj: String
-  email: String
-  description: String
-  catalogSystemEndpoint: String
-  productCommissionPercentage: Float
-  freightCommissionPercentage: Float
-  isBetterScope: Boolean!
-  sellerType: Int!
-  productFeedId: String
-  CSCIdentification: String
-  account: String
-  channel: String
-  salesChannel: String
-  isVtex: Boolean
-  score: Float
+  locationData: LocationData
 }
