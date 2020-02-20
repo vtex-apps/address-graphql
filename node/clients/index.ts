@@ -1,9 +1,9 @@
 import { IOClients } from "@vtex/api";
 
-import { ReverseGeocoderClient } from "./ReverseGeocoderClient";
+import { GoogleGeolocation } from "./GoogleGeolation";
 
 export class Clients extends IOClients {
-  public get reverseGeocode() {
-    return this.getOrSet("reverseGeocode", ReverseGeocoderClient);
+  public get googleGeolocation() {
+    return this.getOrSet("googleGeolocation", GoogleGeolocation);
   }
 }
