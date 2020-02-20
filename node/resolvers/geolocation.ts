@@ -1,13 +1,14 @@
 export const queries = {
   reverseGeocode: async (_: any, args: any, ctx: any): Promise<any> => {
     const { clients } = ctx;
+    const { lat, lng, apiKey } = args;
 
-    const ans = await clients.googleGeolocation.getCountry(
-      args.lat,
-      args.lng,
-      args.apiKey
+    const ans = await clients.googleGeolocation.reverseGeocode(
+      lat,
+      lng,
+      apiKey
     );
 
-    return ans.results[0];
+    return { city: ans.results[0].formatted_address };
   }
 };

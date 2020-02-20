@@ -1,3 +1,0 @@
-type GoogleStuff {
-  formatted_address: String
-}
