@@ -9,6 +9,7 @@ enum AddressType {
 }
 
 # WARNING: Copied from `vtex/checkout-graphql`, should be kept updated
+# Deleted `receiverName` since it is not needed
 type Address {
   addressId: ID
   addressType: AddressType
@@ -19,7 +20,6 @@ type Address {
   neighborhood: String
   number: String
   postalCode: String
-  receiverName: String
   reference: String
   state: String
   street: String

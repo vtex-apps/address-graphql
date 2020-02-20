@@ -9,3 +9,5 @@ const rules: { [key: string]: any } = {
   BRA,
   USA
 };
+
+export default rules;
