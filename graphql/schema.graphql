@@ -1,4 +1,3 @@
 type Query {
-  locationData: LocationData
-  googleStuff(lat: String, lng: String, apiKey: String): GoogleStuff
+  reverseGeocode(lat: String, lng: String, apiKey: String): GoogleStuff
 }
