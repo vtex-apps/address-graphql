@@ -7,13 +7,13 @@ export const queries = {
       ip: headers["x-forwarded-for"].split(",")[0]
     };
   },
-  googleStuff: async (_: any, __: any, ctx: any): Promise<any> => {
+  googleStuff: async (_: any, args: any, ctx: any): Promise<any> => {
     const { clients } = ctx;
 
     const ans = await clients.reverseGeocode.getCountry(
-      "40.714224",
-      "-73.961452",
-      "IF THERE WERE A VALID API KEY HERE THIS WOULD WORK, BELIEVE"
+      args.lat,
+      args.lng,
+      args.apiKey
     );
 
     return ans.results[0];

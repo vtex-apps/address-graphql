@@ -1,4 +1,4 @@
 type Query {
   locationData: LocationData
-  googleStuff: GoogleStuff
+  googleStuff(lat: String, lng: String, apiKey: String): GoogleStuff
 }

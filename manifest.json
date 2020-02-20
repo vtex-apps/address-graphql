@@ -6,12 +6,14 @@
     "graphql": "1.x",
     "node": "6.x"
   },
-  "policies": [{
-    "name": "outbound-access",
-    "attrs": {
-      "host": "maps.googleapis.com/maps",
-      "path": "/api/geocode/json*"
+  "policies": [
+    {
+      "name": "outbound-access",
+      "attrs": {
+        "host": "maps.googleapis.com/maps",
+        "path": "/api/geocode/json*"
+      }
     }
-  }],
+  ],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
