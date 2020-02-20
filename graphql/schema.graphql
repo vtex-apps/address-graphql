@@ -1,3 +1,4 @@
 type Query {
   locationData: LocationData
+  googleStuff: GoogleStuff
 }

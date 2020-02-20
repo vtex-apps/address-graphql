@@ -6,21 +6,12 @@
     "graphql": "1.x",
     "node": "6.x"
   },
-  "policies": [
-    {
-      "name": "outbound-access",
-      "attrs": {
-        "host": "portal.vtexcommercestable.com.br",
-        "path": "/api/seller-register/*"
-      }
-    },
-    {
-      "name": "outbound-access",
-      "attrs": {
-        "host": "portal.vtexcommercebeta.com.br",
-        "path": "/api/seller-register/*"
-      }
+  "policies": [{
+    "name": "outbound-access",
+    "attrs": {
+      "host": "maps.googleapis.com/maps",
+      "path": "/api/geocode/json*"
     }
-  ],
+  }],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }
