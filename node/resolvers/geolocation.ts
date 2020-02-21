@@ -1,10 +1,36 @@
 import { isFunction, find, reduce, map, flow } from "lodash";
-import rules from "../countries/rules";
+import countryRules from "../countries/rules";
 import getCountryISO2 from "../countries/ISO2";
 
-const processGoogleGeocoderResult = (baseAddress, googleAddress, rules) => {
+const processGoogleGeocoderResult = googleAddress => {
+  let baseAddress = {
+    addressId: "1",
+    addressType: "residential",
+    city: null,
+    complement: null,
+    country: null,
+    geoCoordinates: [],
+    neighborhood: null,
+    number: null,
+    postalCode: null,
+    receiverName: null,
+    reference: null,
+    state: null,
+    street: null
+  };
+
+  const rules = countryRules[getCountry(googleAddress)];
+
+  if (!rules) {
+    console.warn(
+      `We don't have geolocation rules for the country: ${getCountry(
+        googleAddress
+      )}`
+    );
+    return baseAddress;
+  }
+
   const geolocationRules = rules.geolocation;
-  const fallbackCountry = rules.country;
 
   let address = flow([
     setAddressFields,
@@ -77,7 +103,7 @@ const processGoogleGeocoderResult = (baseAddress, googleAddress, rules) => {
 
   function setCountry(address) {
     const country = getCountry(googleAddress);
-    address.country = country || fallbackCountry;
+    address.country = country;
     return address;
   }
 
@@ -154,26 +180,6 @@ export const queries = {
       apiKey
     );
 
-    let nullAddress = {
-      addressId: "1",
-      addressType: "residential",
-      city: null,
-      complement: null,
-      country: null,
-      geoCoordinates: [],
-      neighborhood: null,
-      number: null,
-      postalCode: null,
-      receiverName: null,
-      reference: null,
-      state: null,
-      street: null
-    };
-
-    return processGoogleGeocoderResult(
-      nullAddress,
-      googleAddress.results[0],
-      rules.BRA
-    );
+    return processGoogleGeocoderResult(googleAddress.results[0]);
   }
 };
