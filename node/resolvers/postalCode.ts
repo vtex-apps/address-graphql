@@ -1,5 +1,3 @@
-const processAddress = x => x;
-
 export const queries = {
   getAddressFromPostalCode: async (
     _: any,
@@ -9,11 +7,9 @@ export const queries = {
     const { clients } = ctx;
     const { postalCode, countryCode } = args;
 
-    const address = await clients.postalCode.getAddressFromPostalCode(
+    return await clients.postalCode.getAddressFromPostalCode(
       postalCode,
       countryCode
     );
-
-    return processAddress(address);
   }
 };
