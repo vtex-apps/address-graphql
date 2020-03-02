@@ -7,12 +7,9 @@ export const queries = {
     const { clients } = ctx;
     const { postalCode, countryCode } = args;
     console.log(clients, postalCode, countryCode);
-    return {
-      city: "San Nicolas"
-    };
-    // return await clients.postalCode.getAddressFromPostalCode(
-    //   postalCode,
-    //   countryCode
-    // );
+    return await clients.postalCode.getAddressFromPostalCode(
+      postalCode,
+      countryCode
+    );
   }
 };
