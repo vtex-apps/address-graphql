@@ -1,13 +1,13 @@
-import ARG from "./ARG";
-import BOL from "./BOL";
-import BRA from "./BRA";
-import USA from "./USA";
+import ARG from './ARG'
+import BOL from './BOL'
+import BRA from './BRA'
+import USA from './USA'
 
 const rules: { [key: string]: any } = {
   ARG,
   BOL,
   BRA,
-  USA
-};
+  USA,
+}
 
-export default rules;
+export default rules

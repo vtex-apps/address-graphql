@@ -1,9 +1,9 @@
-import { IOClients } from "@vtex/api";
+import { IOClients } from '@vtex/api'
 
-import { GoogleGeolocation } from "./GoogleGeolation";
+import { GoogleGeolocation } from './GoogleGeolation'
 
 export class Clients extends IOClients {
   public get googleGeolocation() {
-    return this.getOrSet("googleGeolocation", GoogleGeolocation);
+    return this.getOrSet('googleGeolocation', GoogleGeolocation)
   }
 }

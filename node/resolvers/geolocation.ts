@@ -1,11 +1,12 @@
-import { isFunction, find, reduce, map, flow } from "lodash";
-import countryRules from "../countries/rules";
-import getCountryISO2 from "../countries/ISO2";
+import { isFunction, find, reduce, map, flow } from 'lodash'
+
+import countryRules from '../countries/rules'
+import getCountryISO2 from '../countries/ISO2'
 
 const processGoogleGeocoderResult = googleAddress => {
-  let baseAddress = {
-    addressId: "1",
-    addressType: "residential",
+  const baseAddress = {
+    addressId: '1',
+    addressType: 'residential',
     city: null,
     complement: null,
     country: null,
@@ -16,99 +17,100 @@ const processGoogleGeocoderResult = googleAddress => {
     receiverName: null,
     reference: null,
     state: null,
-    street: null
-  };
+    street: null,
+  }
 
-  const rules = countryRules[getCountry(googleAddress)];
+  const rules = countryRules[getCountry(googleAddress)]
 
   if (!rules) {
     console.warn(
       `We don't have geolocation rules for the country: ${getCountry(
         googleAddress
       )}`
-    );
-    return baseAddress;
+    )
+    return baseAddress
   }
 
-  const geolocationRules = rules.geolocation;
+  const geolocationRules = rules.geolocation
 
-  let address = flow([
+  const address = flow([
     setAddressFields,
     runGeolocationFieldHandlers,
     setGeoCoordinates,
     setCountry,
-    address => ({
-      ...address,
+    newAddress => ({
+      ...newAddress,
       addressId: baseAddress.addressId,
       addressType: baseAddress.addressType,
-      receiverName: baseAddress.receiverName
-    })
-  ])();
+      receiverName: baseAddress.receiverName,
+    }),
+  ])()
 
   // The functions below use googleAddress and geolocationRules
   // from the closure created.
 
   function setAddressFields() {
-    const indexedRules = revertRuleIndex(geolocationRules);
+    const indexedRules = revertRuleIndex(geolocationRules)
 
     return reduce(
       googleAddress.address_components,
-      (address, component) => {
+      (updatedAddress, component) => {
         const checkoutFieldName = getCheckoutFieldName(
           component.types,
           indexedRules
-        );
+        )
 
         if (checkoutFieldName) {
-          address = setAddressFieldValue(
-            address,
+          return setAddressFieldValue(
+            updatedAddress,
             checkoutFieldName,
             geolocationRules,
             component
-          );
+          )
         }
-        return address;
+
+        return updatedAddress
       },
       {}
-    );
+    )
   }
 
-  function setGeoCoordinates(address) {
-    const location = googleAddress.geometry.location;
+  function setGeoCoordinates(updatedAddress) {
+    const { location } = googleAddress.geometry
 
-    address.geoCoordinates = [
+    updatedAddress.geoCoordinates = [
       isFunction(location.lng) ? location.lng() : location.lng,
-      isFunction(location.lat) ? location.lat() : location.lat
-    ];
+      isFunction(location.lat) ? location.lat() : location.lat,
+    ]
 
-    return address;
+    return updatedAddress
   }
 
   // Run custom function handlers to fill some fields
-  function runGeolocationFieldHandlers(address) {
+  function runGeolocationFieldHandlers(updatedAddress) {
     map(geolocationRules, (rule, propName) => {
       if (rule.handler) {
-        address = rule.handler(address, googleAddress);
+        updatedAddress = rule.handler(address, googleAddress)
       }
-    });
+    })
 
-    map(geolocationRules, (rule, propName) => {
+    map(geolocationRules, rule => {
       if (rule.handler) {
-        address = rule.handler(address, googleAddress);
+        updatedAddress = rule.handler(address, googleAddress)
       }
-    });
+    })
 
-    return address;
+    return updatedAddress
   }
 
-  function setCountry(address) {
-    const country = getCountry(googleAddress);
-    address.country = country;
-    return address;
+  function setCountry(updatedAddress) {
+    const country = getCountry(googleAddress)
+    updatedAddress.country = country
+    return updatedAddress
   }
 
-  return address;
-};
+  return address
+}
 
 /** This function creates a map like this:
  * {
@@ -126,25 +128,25 @@ const processGoogleGeocoderResult = googleAddress => {
  *   "locality": "city"
  * }
  * So it's easy to find which Google address type matches ours
- **/
+ * */
 function revertRuleIndex(geolocationRules) {
   return reduce(
     geolocationRules,
     (acc, value, propName) => {
       for (let i = 0; i < value.types.length; i++) {
-        const type = value.types[i];
-        acc[type] = propName;
+        const type = value.types[i]
+        acc[type] = propName
       }
-      return acc;
+      return acc
     },
     {}
-  );
+  )
 }
 
 // Return the matched checkout field name
 function getCheckoutFieldName(types, indexedRules) {
-  const mappedType = find(types, type => indexedRules[type]);
-  return mappedType ? indexedRules[mappedType] : null;
+  const mappedType = find(types, type => indexedRules[type])
+  return mappedType ? indexedRules[mappedType] : null
 }
 
 function setAddressFieldValue(
@@ -153,33 +155,33 @@ function setAddressFieldValue(
   geolocationRules,
   addressComponent
 ) {
-  const geolocationField = geolocationRules[fieldName];
-  address[fieldName] = addressComponent[geolocationField.valueIn];
-  return address;
+  const geolocationField = geolocationRules[fieldName]
+  address[fieldName] = addressComponent[geolocationField.valueIn]
+  return address
 }
 
 function getCountry(googleAddress) {
   const countryComponent = find(
     googleAddress.address_components,
-    component => component.types.indexOf("country") !== -1
-  );
+    component => component.types.indexOf('country') !== -1
+  )
 
-  return countryComponent ? getCountryISO2(countryComponent.short_name) : null;
+  return countryComponent ? getCountryISO2(countryComponent.short_name) : null
 }
 
 /* END OF COPY-PASTED CODE FROM ADDRESS-FORM  */
 
 export const queries = {
   reverseGeocode: async (_: any, args: any, ctx: any): Promise<any> => {
-    const { clients } = ctx;
-    const { lat, lng, apiKey } = args;
+    const { clients } = ctx
+    const { lat, lng, apiKey } = args
 
     const googleAddress = await clients.googleGeolocation.reverseGeocode(
       lat,
       lng,
       apiKey
-    );
+    )
 
-    return processGoogleGeocoderResult(googleAddress.results[0]);
-  }
-};
+    return processGoogleGeocoderResult(googleAddress.results[0])
+  },
+}

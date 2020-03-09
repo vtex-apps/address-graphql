@@ -1,7 +1,7 @@
-import { queries as GeolocationQueries } from "./geolocation";
+import { queries as GeolocationQueries } from './geolocation'
 
 export const resolvers = {
   Query: {
-    ...GeolocationQueries
-  }
-};
+    ...GeolocationQueries,
+  },
+}
