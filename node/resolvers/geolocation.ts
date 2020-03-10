@@ -172,14 +172,13 @@ function getCountry(googleAddress) {
 /* END OF COPY-PASTED CODE FROM ADDRESS-FORM  */
 
 export const queries = {
-  reverseGeocode: async (_: any, args: any, ctx: any): Promise<any> => {
+  reverseGeocode: async (_: any, args: any, ctx: Context): Promise<any> => {
     const { clients } = ctx
-    const { lat, lng, apiKey } = args
+    const { lat, lng } = args
 
     const googleAddress = await clients.googleGeolocation.reverseGeocode(
       lat,
-      lng,
-      apiKey
+      lng
     )
 
     return processGoogleGeocoderResult(googleAddress.results[0])

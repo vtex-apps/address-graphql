@@ -8,9 +8,5 @@ type Query {
     Longitude of the point you want to get the Address object from
     """
     lng: String
-    """
-    Service providers' API key
-    """
-    apiKey: String
   ): Address
 }

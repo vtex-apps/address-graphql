@@ -1,6 +1,6 @@
 import { IOClients } from '@vtex/api'
 
-import { GoogleGeolocation } from './GoogleGeolation'
+import { GoogleGeolocation } from './GoogleGeolocation'
 
 export class Clients extends IOClients {
   public get googleGeolocation() {
