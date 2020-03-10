@@ -1,7 +1,7 @@
 import { isFunction, find, reduce, map, flow } from 'lodash'
 
 import countryRules from '../countries/rules'
-import getCountryISO2 from '../countries/ISO2'
+import { toAlpha3 } from '../countries/ISO'
 
 const processGoogleGeocoderResult = googleAddress => {
   const baseAddress = {
@@ -166,7 +166,7 @@ function getCountry(googleAddress) {
     component => component.types.indexOf('country') !== -1
   )
 
-  return countryComponent ? getCountryISO2(countryComponent.short_name) : null
+  return countryComponent ? toAlpha3(countryComponent.short_name) : null
 }
 
 /* END OF COPY-PASTED CODE FROM ADDRESS-FORM  */
