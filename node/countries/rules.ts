@@ -1,9 +1,10 @@
+import { ISOAlpha3 } from './types'
 import ARG from './ARG'
 import BOL from './BOL'
 import BRA from './BRA'
 import USA from './USA'
 
-const rules: { [key: string]: any } = {
+const rules: { [key in ISOAlpha3]?: Rules } = {
   ARG,
   BOL,
   BRA,

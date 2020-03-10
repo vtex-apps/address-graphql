@@ -1,4 +1,4 @@
-const rules = {
+const rules: Rules = {
   geolocation: {
     postalCode: {
       valueIn: 'long_name',
@@ -8,10 +8,6 @@ const rules = {
     street: {
       valueIn: 'long_name',
       types: ['route'],
-      handler: (address, googleAddress) => {
-        address.street = { value: googleAddress.name }
-        return address
-      },
     },
     neighborhood: {
       valueIn: 'long_name',

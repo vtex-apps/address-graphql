@@ -1,4 +1,4 @@
-const rules = {
+const rules: Rules = {
   geolocation: {
     postalCode: {
       valueIn: 'long_name',
