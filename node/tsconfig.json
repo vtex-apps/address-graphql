@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["node"],
-    "typeRoots": ["node_modules/@types"],
+    "types": ["node", "googlemaps"],
     "target": "es2019",
     "module": "commonjs",
     "sourceMap": false,
