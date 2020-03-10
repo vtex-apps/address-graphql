@@ -1,18 +1,13 @@
 {
-  "name": "node",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/lodash": "^4.14.149",
-    "@vtex/api": "6.13.1"
-  },
+  "name": "address-graphql",
+  "version": "0.0.2",
+  "license": "UNLICENSED",
+  "private": true,
   "dependencies": {
     "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "@vtex/api": "6.17.0"
   }
 }
