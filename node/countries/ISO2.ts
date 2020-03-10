@@ -248,6 +248,8 @@ const countryISOMapping = {
   ZW: 'ZWE',
 }
 
-export default function getCountryISO2(country) {
+export type CountryISO = keyof typeof countryISOMapping
+
+export default function getCountryISO2(country: CountryISO) {
   return countryISOMapping[country]
 }
