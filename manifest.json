@@ -16,7 +16,6 @@
         "title": "API Key",
         "description": "API key used to access external geocoding service",
         "type": "string",
-        "required": true,
         "default": "API KEY"
       }
     }
