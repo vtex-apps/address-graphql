@@ -6,6 +6,21 @@
     "graphql": "1.x",
     "node": "6.x"
   },
+  "dependencies": {},
+  "settingsSchema": {
+    "title": "Address GraphQL",
+    "description": "Service related to address localization",
+    "type": "object",
+    "properties": {
+      "apiKey": {
+        "title": "API Key",
+        "description": "API key used to access external geocoding service",
+        "type": "string",
+        "required": true,
+        "default": "API KEY"
+      }
+    }
+  },
   "policies": [
     {
       "name": "outbound-access",
