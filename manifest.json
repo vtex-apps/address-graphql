@@ -1,15 +1,17 @@
 {
-  "name": "address-graphql",
   "vendor": "vtex",
-  "version": "0.0.1",
+  "name": "address-graphql",
+  "version": "0.0.0",
+  "title": "Address GraphQL",
+  "description": "Service related to address geolocation",
   "builders": {
+    "docs": "0.x",
     "graphql": "1.x",
     "node": "6.x"
   },
-  "dependencies": {},
   "settingsSchema": {
     "title": "Address GraphQL",
-    "description": "Service related to address localization",
+    "description": "Service related to address geolocation",
     "type": "object",
     "properties": {
       "apiKey": {
