@@ -7,29 +7,28 @@ declare global {
     clients: Clients
   }
 
-  enum AddressType {
-    residential,
-    commercial,
-    inStore,
-    giftRegistry,
-    pickup,
-    search,
-  }
+  type AddressType =
+    | 'residential'
+    | 'commercial'
+    | 'inStore'
+    | 'giftRegistry'
+    | 'pickup'
+    | 'search'
 
   interface Address {
     addressId: string
     addressType: AddressType
-    city: string
-    complement: string
-    country: Strinstring
+    city: string | null
+    complement: string | null
+    country: string | null
     geoCoordinates: number[]
-    neighborhood: string
-    number: string
-    postalCode: string
-    receiverName: string
-    reference: string
-    state: string
-    street: string
+    neighborhood: string | null
+    number: string | null
+    postalCode: string | null
+    receiverName: string | null
+    reference: string | null
+    state: string | null
+    street: string | null
   }
 
   type AddressFields = keyof Address
@@ -41,7 +40,7 @@ declare global {
     }
   }
 
-  interface Rule {
+  interface GeolocationRule {
     valueIn: 'long_name' | 'short_name'
     types: string[]
     required?: boolean
@@ -61,7 +60,7 @@ declare global {
     | 'number'
 
   type GeolocationRules = {
-    [component in GeolocationComponents]?: Rule
+    [component in GeolocationComponents]?: GeolocationRule
   }
 
   interface Rules {

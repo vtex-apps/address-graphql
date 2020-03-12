@@ -6,8 +6,8 @@ import { toAlpha3 } from '../countries/ISO'
 
 const processGoogleGeocoderResult = (
   googleAddress: google.maps.GeocoderResult
-) => {
-  const baseAddress = {
+): Address => {
+  const baseAddress: Address = {
     addressId: '1',
     addressType: 'residential',
     city: null,
@@ -168,10 +168,17 @@ function getCountry(googleAddress: google.maps.GeocoderResult) {
     : null
 }
 
-/* END OF COPY-PASTED CODE FROM ADDRESS-FORM  */
+interface ReverseGeocodeArgs {
+  lat: string
+  lng: string
+}
 
 export const queries = {
-  reverseGeocode: async (_: unknown, args: any, ctx: Context): Promise<any> => {
+  reverseGeocode: async (
+    _: unknown,
+    args: ReverseGeocodeArgs,
+    ctx: Context
+  ): Promise<Address> => {
     const { clients } = ctx
     const { lat, lng } = args
 
