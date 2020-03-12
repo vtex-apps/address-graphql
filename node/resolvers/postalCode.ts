@@ -1,15 +1,17 @@
+interface PostalCodeQueryArgs {
+  postalCode: string
+  countryCode: string
+}
+
 export const queries = {
   getAddressFromPostalCode: async (
-    _: any,
-    args: any,
-    ctx: any
-  ): Promise<any> => {
-    const { clients } = ctx;
-    const { postalCode, countryCode } = args;
+    _: unknown,
+    args: PostalCodeQueryArgs,
+    ctx: Context
+  ): Promise<Address> => {
+    const { clients } = ctx
+    const { postalCode, countryCode } = args
 
-    return await clients.postalCode.getAddressFromPostalCode(
-      postalCode,
-      countryCode
-    );
-  }
-};
+    return clients.postalCode.getAddressFromPostalCode(postalCode, countryCode)
+  },
+}

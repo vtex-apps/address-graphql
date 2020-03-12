@@ -1,7 +1,7 @@
 import { IOClients } from '@vtex/api'
 
 import { GoogleGeolocation } from './GoogleGeolocation'
-import { PostalCode } from "./PostalCode";
+import { PostalCode } from './PostalCode'
 
 export class Clients extends IOClients {
   public get googleGeolocation() {
@@ -9,6 +9,6 @@ export class Clients extends IOClients {
   }
 
   public get postalCode() {
-    return this.getOrSet("postalCode", PostalCode);
+    return this.getOrSet('postalCode', PostalCode)
   }
 }
