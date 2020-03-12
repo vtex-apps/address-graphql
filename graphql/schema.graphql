@@ -1,28 +1,12 @@
 type Query {
-  seller(id: ID!): Seller @cacheControl(scope: PRIVATE)
-}
-
-type Seller {
-  id: ID!
-  cacheId: ID!
-  name: String!
-  logo: String
-  isActive: Boolean!
-  fulfillmentEndpoint: String!
-  allowHybridPayments: Boolean!
-  cnpj: String
-  email: String
-  description: String
-  catalogSystemEndpoint: String
-  productCommissionPercentage: Float
-  freightCommissionPercentage: Float
-  isBetterScope: Boolean!
-  sellerType: Int!
-  productFeedId: String
-  CSCIdentification: String
-  account: String
-  channel: String
-  salesChannel: String
-  isVtex: Boolean
-  score: Float
+  reverseGeocode(
+    """
+    Latitude of the point you want to get the Address object from
+    """
+    lat: String
+    """
+    Longitude of the point you want to get the Address object from
+    """
+    lng: String
+  ): Address
 }

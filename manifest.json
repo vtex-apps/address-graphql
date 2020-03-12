@@ -1,24 +1,33 @@
 {
-  "name": "teste-graphql",
   "vendor": "vtex",
-  "version": "0.0.1",
+  "name": "places-graphql",
+  "version": "0.0.0",
+  "title": "Places GraphQL",
+  "description": "Service related to address geolocation",
   "builders": {
+    "docs": "0.x",
     "graphql": "1.x",
-    "node": "4.x"
+    "node": "6.x"
+  },
+  "settingsSchema": {
+    "title": "Places GraphQL",
+    "description": "Service related to address geolocation",
+    "type": "object",
+    "properties": {
+      "apiKey": {
+        "title": "API Key",
+        "description": "API key used to access external geocoding service",
+        "type": "string",
+        "default": "API KEY"
+      }
+    }
   },
   "policies": [
     {
       "name": "outbound-access",
       "attrs": {
-        "host": "portal.vtexcommercestable.com.br",
-        "path": "/api/seller-register/*"
-      }
-    },
-    {
-      "name": "outbound-access",
-      "attrs": {
-        "host": "portal.vtexcommercebeta.com.br",
-        "path": "/api/seller-register/*"
+        "host": "maps.googleapis.com/maps",
+        "path": "/api/geocode/json*"
       }
     }
   ],
