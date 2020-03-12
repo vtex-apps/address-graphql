@@ -1,6 +1,6 @@
 {
   "name": "address-graphql",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
