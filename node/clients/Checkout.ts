@@ -1,6 +1,6 @@
 import { JanusClient } from '@vtex/api'
 
-export class PostalCode extends JanusClient {
+export class Checkout extends JanusClient {
   public getAddressFromPostalCode = (
     postalCode: string,
     countryCode: string
