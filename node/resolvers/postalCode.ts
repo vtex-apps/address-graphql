@@ -9,9 +9,9 @@ export const queries = {
     args: PostalCodeQueryArgs,
     ctx: Context
   ): Promise<Address> => {
-    const { clients } = ctx
+    const { clients: { postalCode } } = ctx
     const { postalCode, countryCode } = args
 
-    return clients.postalCode.getAddressFromPostalCode(postalCode, countryCode)
+    return postalCode.getAddressFromPostalCode(postalCode, countryCode)
   },
 }
