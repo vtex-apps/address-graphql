@@ -9,4 +9,15 @@ type Query {
     """
     lng: String
   ): Address
+
+  getAddressFromPostalCode(
+    """
+    Postal Code
+    """
+    postalCode: String
+    """
+    Alpha-3 code for the country
+    """
+    countryCode: String
+  ): Address
 }
