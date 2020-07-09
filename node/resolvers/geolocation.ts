@@ -65,9 +65,14 @@ const processGoogleGeocoderResult = (
   }
 
   function setGeoCoordinates(updatedAddress: Address) {
-    const { location } = googleAddress.geometry
+    const {
+      location: { lng, lat },
+    } = googleAddress.geometry
 
-    updatedAddress.geoCoordinates = [location.lng(), location.lat()]
+    updatedAddress.geoCoordinates = [
+      typeof lng === 'function' ? lng() : lng,
+      typeof lat === 'function' ? lat() : lat,
+    ]
 
     return updatedAddress
   }
@@ -181,10 +186,14 @@ export const queries = {
   ): Promise<Address> => {
     const { clients } = ctx
     const { lat, lng } = args
+    const { apiKey } = await clients.apps.getAppSettings(
+      process.env.VTEX_APP_ID
+    )
 
     const googleAddress = await clients.googleGeolocation.reverseGeocode(
       lat,
-      lng
+      lng,
+      apiKey
     )
 
     return processGoogleGeocoderResult(googleAddress.results[0])

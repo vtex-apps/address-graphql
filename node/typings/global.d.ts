@@ -66,4 +66,10 @@ declare global {
   interface Rules {
     geolocation: GeolocationRules
   }
+
+  namespace NodeJS {
+    interface ProcessEnv {
+      VTEX_APP_ID: string
+    }
+  }
 }

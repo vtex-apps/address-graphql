@@ -26,8 +26,8 @@
     {
       "name": "outbound-access",
       "attrs": {
-        "host": "maps.googleapis.com/maps",
-        "path": "/api/geocode/json*"
+        "host": "maps.googleapis.com",
+        "path": "/maps/api/*"
       }
     },
     {
