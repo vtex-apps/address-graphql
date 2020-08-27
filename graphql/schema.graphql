@@ -20,4 +20,8 @@ type Query {
     """
     countryCode: String
   ): Address
+
+  suggestAddresses(searchTerm: String): [AddressSuggestion]
+
+  getAddressByExternalId(id: String): Address
 }
