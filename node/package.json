@@ -1,6 +1,6 @@
 {
   "name": "places-graphql",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
