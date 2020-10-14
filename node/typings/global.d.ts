@@ -67,19 +67,6 @@ declare global {
     geolocation: GeolocationRules
   }
 
-  interface MatchInterval {
-    offset: number
-    length: number
-  }
-
-  interface AddressSuggestion {
-    description: string
-    mainText: string
-    mainTextMatchInterval: MatchInterval
-    secondaryText: string
-    externalId: string
-  }
-
   namespace NodeJS {
     interface ProcessEnv {
       VTEX_APP_ID: string
