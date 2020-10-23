@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "places-graphql",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "title": "Places GraphQL",
   "description": "Service related to address geolocation",
   "builders": {
